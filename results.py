@@ -1,4 +1,5 @@
 from questions import *
+import itertools
 
 
 #INI2
@@ -139,3 +140,34 @@ def revc(input_text):
 
 
 assert revc(revc_variable) == revc_result
+
+
+def hamm(text_1, text_2):
+    '''
+    Given: Two DNA strings s and t of equal length (not exceeding 1 kbp).
+    Return: The Hamming distance dH(s,t).
+    '''
+    result = 0
+    for i in range(len(text_1)):
+        if text_1[i] != text_2[i]:
+            result += 1
+    return result
+
+
+assert hamm(*hamm_variables) == hamm_result
+
+
+def perm(n):
+    '''
+    Given: A positive integer n≤7.
+    Return: The total number of permutations of length n, followed by a list of all such permutations (in any order).
+    '''
+    start_list = list(range(1, n + 1))
+    temp = list(itertools.permutations(start_list))
+    result = str(len(temp)) + "\n"
+    for i in temp:
+        result += " ".join(map(str, i)) + "\n"
+
+    return result
+
+# print(perm(7))
