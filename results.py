@@ -171,3 +171,57 @@ def perm(n):
     return result
 
 # print(perm(7))
+
+
+def find_all(input_text, sub_string):
+    result = []
+    for i in range(len(input_text)):
+        start = input_text.find(sub_string, i)
+        if start == -1:
+            break
+        if start + 1 not in result:
+            result.append(start + 1)
+    result = " ".join(map(str, result))
+    return result
+
+
+assert find_all(*subs_variables) == subs_result
+
+
+def gc_content(input_text):
+    result = 0
+    for i in input_text:
+        if i == "C" or i == "G":
+            result += 1
+    if len(input_text) > 0:
+        dna_text_len = len(input_text.replace("\n", ""))
+        return result/dna_text_len * 100
+    else:
+        return 0
+
+def gc_percent(input_text):
+    start = 0
+    result = {}
+    biggest_gc = 0
+    biggest_name = ""
+    while True:
+        start = input_text.find(">", start)
+        if start == -1:
+            break
+        end = start + 14
+        next_str = input_text.find(">", start + 1)
+        if next_str == -1:
+            next_str = len(input_text)
+        dna_text = input_text[end + 1:next_str]
+        dna_gc_content = gc_content(dna_text)
+        result[input_text[start + 1:end]] = [dna_text, dna_gc_content]
+        if biggest_gc < dna_gc_content:
+            biggest_gc = dna_gc_content
+            biggest_name = input_text[start + 1:end]
+        start += len(dna_text)
+    biggest_gc = '%.6f' % round(biggest_gc, 6)
+    return f"{biggest_name}\n{biggest_gc}"
+
+
+assert gc_percent(gc_variable) == gc_result
+
