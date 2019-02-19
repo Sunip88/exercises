@@ -189,6 +189,11 @@ assert find_all(*subs_variables) == subs_result
 
 
 def gc_content(input_text):
+    '''
+    Taking string and checking G and C percentage
+    :param input_text: string
+    :return: float
+    '''
     result = 0
     for i in input_text:
         if i == "C" or i == "G":
@@ -200,6 +205,11 @@ def gc_content(input_text):
         return 0
 
 def gc_percent(input_text):
+    '''
+    Given: At most 10 DNA strings in FASTA format (of length at most 1 kbp each).
+    Return: The ID of the string having the highest GC-content, followed by the GC-content of that string.
+    Rosalind allows for a default error of 0.001 in all decimal answers unless otherwise stated
+    '''
     start = 0
     result = {}
     biggest_gc = 0
@@ -225,3 +235,80 @@ def gc_percent(input_text):
 
 assert gc_percent(gc_variable) == gc_result
 
+
+RNA_CODON_DATA = {
+    "UUU": "F", "UUC": "F", "UUA": "L", "UUG": "L", "UCU": "S", "UCC": "S", "UCA": "S", "UCG": "S", "UAU": "Y",
+    "UAC": "Y", "UAA": "Stop", "UAG": "Stop", "UGU": "C", "UGC": "C", "UGA": "Stop", "UGG": "W", "CUU": "L",
+    "CUC": "L", "CUA": "L", "CUG": "L", "CCU": "P", "CCC": "P", "CCA": "P", "CCG": "P", "CAU": "H", "CAC": "H",
+    "CAA": "Q", "CAG": "Q", "CGU": "R", "CGC": "R", "CGA": "R", "CGG": "R", "AUU": "I", "AUC": "I", "AUA": "I",
+    "AUG": "M", "ACU": "T", "ACC": "T", "ACA": "T", "ACG": "T", "AAU": "N", "AAC": "N", "AAA": "K", "AAG": "K",
+    "AGU": "S", "AGC": "S", "AGA": "R", "AGG": "R", "GUU": "V", "GUC": "V", "GUA": "V", "GUG": "V", "GCU": "A",
+    "GCC": "A", "GCA": "A", "GCG": "A", "GAU": "D", "GAC": "D", "GAA": "E", "GAG": "E", "GGU": "G", "GGC": "G",
+    "GGA": "G", "GGG": "G",
+}
+
+def translation_to_protein(input_text):
+    '''
+    Given: An RNA string s corresponding to a strand of mRNA (of length at most 10 kbp).
+    Return: The protein string encoded by s.
+    '''
+    start = 0
+    result = ""
+    while True:
+        end = start + 3
+        if end > len(input_text):
+            break
+        temp = input_text[start:end]
+        if temp in RNA_CODON_DATA:
+            if RNA_CODON_DATA[temp] == "Stop":
+                break
+            result += RNA_CODON_DATA[temp]
+        else:
+            break
+        start += 3
+    return result
+
+
+assert translation_to_protein(prot_variable) == prot_result
+
+
+MONOISOTOPIC_MASS_TABLE = {
+    "A": 71.03711,
+    "C": 103.00919,
+    "D": 115.02694,
+    "E": 129.04259,
+    "F": 147.06841,
+    "G": 57.02146,
+    "H": 137.05891,
+    "I": 113.08406,
+    "K": 128.09496,
+    "L": 113.08406,
+    "M": 131.04049,
+    "N": 114.04293,
+    "P": 97.05276,
+    "Q": 128.05858,
+    "R": 156.10111,
+    "S": 87.03203,
+    "T": 101.04768,
+    "V": 99.06841,
+    "W": 186.07931,
+    "Y": 163.06333,
+
+}
+
+
+def weight_protein(input_text):
+    '''
+    Given: A protein string input_text
+    Return: The total weight of P.
+    :param input_text: string
+    :return: float
+    '''
+    result = 0
+    for i in input_text:
+        if i in MONOISOTOPIC_MASS_TABLE:
+            result += MONOISOTOPIC_MASS_TABLE[i]
+    return round(result, 3)
+
+
+assert weight_protein(prtm_variable) == prtm_result
