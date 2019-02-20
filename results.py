@@ -1,3 +1,4 @@
+
 from questions import *
 import itertools
 
@@ -312,3 +313,46 @@ def weight_protein(input_text):
 
 
 assert weight_protein(prtm_variable) == prtm_result
+
+
+def fib_rabbit(n, k):
+    '''
+    Given: Positive integers n≤40 and k≤5.
+    Return: The total number of rabbit pairs that will be present after n months, if we begin with 1 pair and in
+    each generation, every pair of reproduction-age rabbits produces a litter of k rabbit pairs (instead of only 1 pair)
+    :param n: integer, number of months
+    :param k: integer, produced litter
+    :return: integer, number o pairs
+    '''
+    if n < 1:
+        return 0
+    elif n == 1:
+        return 1
+
+    return (fib_rabbit(n - 2, k) * k) + fib_rabbit(n - 1, k)
+
+
+assert fib_rabbit(*fib_variables) == fib_result
+
+
+def fib_rabbit_lived(n, m=1):
+    # if n < 1:
+    #     return 0
+    # elif n == 1:
+    #     return 1
+    # if n <= m:
+    #     return fib_rabbit_lived(n - 2, m) + fib_rabbit_lived(n - 1, m)
+    # elif n == m + 1:
+    #     return fib_rabbit_lived(n - 2, m) + fib_rabbit_lived(n - 1, m) - 1
+    # return fib_rabbit_lived(n - 2, m) + fib_rabbit_lived(n - 1, m) - fib_rabbit_lived(n - (m + 1), m)
+
+    #code above is usless, for high numbers its too slow
+
+    #code below is not mine
+    ages = [1] + [0]*(m-1)
+    for i in range(n-1):
+        ages = [sum(ages[1:])] + ages[:-1]
+    return sum(ages)
+
+
+assert fib_rabbit_lived(*fibd_variables) == fibd_result
