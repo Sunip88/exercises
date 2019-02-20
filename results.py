@@ -356,3 +356,21 @@ def fib_rabbit_lived(n, m=1):
 
 
 assert fib_rabbit_lived(*fibd_variables) == fibd_result
+
+
+def reverse_palindrome(input_text):
+    result = ""
+    input_text = input_text.split("\n", 1)[1].replace("\n", "")
+    text_complementary = revc(input_text)[::-1]
+    for i in range(len(input_text)):
+        for j in range(4, 13):
+            part_text = input_text[i:i + j]
+            part_text_complementary = text_complementary[i:i + j]
+            part_text_len = len(part_text)
+            if part_text_len % 2 == 0 and part_text_len > 3 and i+j < len(input_text) + 1:
+                if part_text == part_text_complementary[::-1]:
+                    result += f"{i + 1} {j}\n"
+    return result
+
+
+assert reverse_palindrome(revp_variable) == revp_result
