@@ -1744,3 +1744,7 @@ NNU
 NNX
 NNN
 """
+
+#iprb
+iprb_variables = [24, 22, 18]
+iprb_result = 0.79725

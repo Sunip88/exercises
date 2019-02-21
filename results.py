@@ -418,7 +418,7 @@ a = """D N A
 3"""
 
 def enumerating_2(input_alphabet, input_length):
-    # ugly
+    # ugly, works only to 10 signs :/
     result = []
     result_text = ""
     alphabet = list(input_alphabet)
@@ -446,3 +446,19 @@ def enumerating_2(input_alphabet, input_length):
 
 assert enumerating_2(*lexv_variable) == lexv_result
 
+
+def mendel_first_law(k, m, n):
+    population = (['AA'] * k) + (['Aa'] * m) + (['aa'] * n)
+    all_children = []
+    for parent_1 in population:
+        chosen = population[:]
+        chosen.remove(parent_1)
+        for parent_2 in chosen:
+            children = itertools.product(parent_1, parent_2)
+            all_children.extend(["".join(i) for i in children])
+    dominants = len([i for i in all_children if "A" in i])
+
+    return round(float(dominants/len(all_children)), 5)
+
+
+assert mendel_first_law(*iprb_variables) == iprb_result
