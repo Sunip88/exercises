@@ -1,4 +1,3 @@
-
 from questions import *
 import itertools
 
@@ -374,3 +373,43 @@ def reverse_palindrome(input_text):
 
 
 assert reverse_palindrome(revp_variable) == revp_result
+
+
+def enumerating(input_alphabet, input_length):
+    result_text = ""
+    alphabet = list(input_alphabet)
+    for p in itertools.product(alphabet, repeat=input_length):
+        result_text += f"{''.join(p)}\n"
+    return result_text
+
+
+assert enumerating(*lexf_variables) == lexf_result
+
+
+def enumerating_number(input_number):
+    # ugly idea
+    length = 0
+    result_text = ""
+    numbers = []
+    result = []
+    for i in range(1, input_number + 1):
+        numbers.append(str(i))
+        numbers.append("-" + str(i))
+    for p in itertools.permutations(numbers, input_number):
+        result.append(p)
+    for i in result:
+        temp = []
+        point = 0
+        for j in i:
+            num = abs(int(j))
+            if num not in temp:
+                point += 1
+            temp.append(num)
+        if point == input_number:
+            result_text += f"{' '.join(i)}\n"
+            length += 1
+    return str(length) + "\n" + result_text
+
+
+assert enumerating_number(sign_variable) == sign_result
+
