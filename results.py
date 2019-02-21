@@ -414,9 +414,6 @@ def enumerating_number(input_number):
 assert enumerating_number(sign_variable) == sign_result
 
 
-a = """D N A
-3"""
-
 def enumerating_2(input_alphabet, input_length):
     # ugly, works only to 10 signs :/
     result = []
@@ -462,3 +459,56 @@ def mendel_first_law(k, m, n):
 
 
 assert mendel_first_law(*iprb_variables) == iprb_result
+
+
+def consensus_string(input_text):
+    result = []
+    start = 0
+    input_text_result = {}
+    while True:
+        start = input_text.find(">", start)
+        if start == -1:
+            break
+        end = input_text.find("\n", start)
+        next_str = input_text.find(">", start + 1)
+        if next_str == -1:
+            next_str = len(input_text)
+        dna_text = input_text[end + 1:next_str]
+        input_text_result[input_text[start + 1:end]] = [dna_text.replace("\n", "")]
+        start += len(dna_text)
+    val = input_text_result[list(input_text_result)[0]]
+    length = len(val[0])
+    a_list = [0] * length
+    c_list = [0] * length
+    t_list = [0] * length
+    g_list = [0] * length
+
+    for key, val in input_text_result.items():
+        for nr, i in enumerate(val[0]):
+            if i == "A":
+                a_list[nr] += 1
+            elif i == "C":
+                c_list[nr] += 1
+            elif i == "T":
+                t_list[nr] += 1
+            elif i == "G":
+                g_list[nr] += 1
+    for i in range(length):
+        temp = max([a_list[i], c_list[i], t_list[i], g_list[i]])
+        if a_list[i] == temp:
+            result.append("A")
+        elif c_list[i] == temp:
+            result.append("C")
+        elif t_list[i] == temp:
+            result.append("T")
+        elif g_list[i] == temp:
+            result.append("G")
+
+    result_string = "".join(result) + "\n"
+    result_string += "A: " + " ".join(map(str, a_list)) + "\n"
+    result_string += "C: " + " ".join(map(str, c_list)) + "\n"
+    result_string += "G: " + " ".join(map(str, g_list)) + "\n"
+    result_string += "T: " + " ".join(map(str, t_list)) + "\n"
+    return result_string
+
+assert consensus_string(cons_variables) == cons_result
