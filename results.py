@@ -413,3 +413,36 @@ def enumerating_number(input_number):
 
 assert enumerating_number(sign_variable) == sign_result
 
+
+a = """D N A
+3"""
+
+def enumerating_2(input_alphabet, input_length):
+    # ugly
+    result = []
+    result_text = ""
+    alphabet = list(input_alphabet)
+    num_alphabet = range(0, len(input_alphabet))
+    length = input_length
+    while length > 0:
+        for p in itertools.product(num_alphabet, repeat=length):
+            if len(p) < input_length + 1:
+                spaces = input_length - len(p)
+                result.append('.'.join(map(str, p)) + " " * spaces)
+            else:
+                result.append('.'.join(map(str, p)))
+        length -= 1
+    result.sort()
+    for i in result:
+        temp_string = ""
+        a = i.split(".")
+        for j in a:
+            if j != " ":
+                number = int(j)
+                temp_string += alphabet[number]
+        result_text += temp_string + "\n"
+    return result_text
+
+
+assert enumerating_2(*lexv_variable) == lexv_result
+
