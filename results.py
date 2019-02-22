@@ -512,3 +512,4 @@ def consensus_string(input_text):
     return result_string
 
 assert consensus_string(cons_variables) == cons_result
+
