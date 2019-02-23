@@ -65,3 +65,26 @@ tribonacci_result_6 = [1, 2, 3, 6, 11, 20, 37, 68, 125, 230]
 tribonacci_result_7 = [3, 2, 1, 6, 9, 16, 31, 56, 103, 190]
 tribonacci_result_8 = [1]
 tribonacci_result_9 = []
+
+catch_sign_change_variable_1 = [1, 3, 4, 5]
+catch_sign_change_variable_2 = [1, -3, -4, 0, -1, 5]
+catch_sign_change_variable_3 = [15, -47, 84, -30, -11, -5, 74, 77]
+catch_sign_change_variable_4 = []
+catch_sign_change_variable_5 = [-47, 84, -30, -11, -5, 74, 77]
+
+catch_sign_change_result_1 = 0
+catch_sign_change_result_2 = 4
+catch_sign_change_result_3 = 4
+catch_sign_change_result_4 = 0
+catch_sign_change_result_5 = 3
+
+get_pin_variable_1 = "8"
+get_pin_variable_2 = "11"
+get_pin_variable_3 = "369"
+
+get_pin_result_1 = ['5', '7', '8', '9', '0']
+get_pin_result_2 = ["11", "22", "44", "12", "21", "14", "41", "24", "42"]
+get_pin_result_3 = ["339", "366", "399", "658", "636", "258", "268", "669", "668", "266", "369", "398", "256", "296",
+                    "259", "368", "638", "396", "238", "356", "659", "639", "666", "359", "336", "299", "338", "696",
+                    "269", "358", "656", "698", "699", "298", "236", "239"]
+
