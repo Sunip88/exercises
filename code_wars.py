@@ -1,6 +1,7 @@
 from code_wars_questions import *
 from datetime import date, timedelta
 from itertools import combinations, permutations, product, combinations_with_replacement
+import numpy
 
 
 def balance(book):
@@ -159,3 +160,119 @@ def get_pins(observed):
 assert sorted(get_pins(get_pin_variable_1)) == sorted(get_pin_result_1)
 assert sorted(get_pins(get_pin_variable_2)) == sorted(get_pin_result_2)
 assert sorted(get_pins(get_pin_variable_3)) == sorted(get_pin_result_3)
+
+
+def valid_parentheses(string):
+    temp = []
+    for i in string:
+        if i == "(":
+            temp.append(i)
+        elif i == ")":
+            if len(temp) > 0:
+                temp.pop()
+            else:
+                return False
+    if len(temp) == 0:
+        return True
+    return False
+
+
+assert valid_parentheses("hi())(") == False
+assert valid_parentheses("  (") == False
+assert valid_parentheses("") == True
+assert valid_parentheses("hi(hi)()") == True
+
+
+def unpack(l):
+    # not mine
+    res = []
+    for i in l:
+        if type(i) is list:
+            res += unpack(i)
+        elif type(i) is tuple:
+            res += unpack(list(i))
+        elif type(i) is dict:
+            res += unpack(list(i.keys()))
+            res += unpack(list(i.values()))
+        elif type(i) is set:
+            res += unpack(list(i))
+        else:
+            res += [i]
+    return res
+
+
+def duplicate_count(text):
+    text_lower = text.lower()
+    temp = []
+    result = []
+    count = 0
+    for i in text_lower:
+        cont_res = i in result
+        cont_temp = i in temp
+        if not cont_res and not cont_temp:
+            temp.append(i)
+        elif not cont_res and cont_temp:
+            count += 1
+            result.append(i)
+    return count
+
+
+assert duplicate_count("indivisibility") == 1
+
+
+def points(games):
+    count = 0
+    for i in games:
+        x = i[0]
+        y = i[2]
+        if x > y:
+            count += 3
+        elif x == y:
+            count += 1
+    return count
+
+
+def validSolution(board):
+    check = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    # checking rows
+    for row in board:
+        if sorted(row) != check:
+            return False
+    # checking columns
+    n = 0
+    while n < 9:
+        column = []
+        for i in range(9):
+            column.append(board[i][n])
+        if sorted(column) != check:
+            return False
+        n += 1
+
+    # checking 3x3
+    np_board = numpy.array(board)
+    row_val_1 = 0
+    col_val_1 = 3
+    row_val_2 = 0
+    col_val_2 = 3
+    while row_val_2 < 10 and col_val_2 < 10:
+        part_board = np_board[row_val_1:col_val_1, row_val_2:col_val_2]
+        flat_list = []
+        for row in part_board:
+            for i in row:
+                flat_list.append(i)
+        if sorted(flat_list) != check:
+            return False
+        col_val_1 += 3
+        row_val_1 += 3
+        if col_val_1 > 9:
+            row_val_1 = 0
+            col_val_1 = 3
+            col_val_2 += 3
+            row_val_2 += 3
+    return True
+
+
+assert validSolution(sudoku1) == False
+assert validSolution(sudoku2) == True
+assert validSolution(sudoku3) == False
+
