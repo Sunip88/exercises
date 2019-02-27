@@ -117,3 +117,10 @@ sudoku3 = [[5, 3, 4, 6, 7, 8, 9, 1, 2],
            [9, 6, 1, 5, 3, 7, 2, 8, 4],
            [2, 8, 7, 4, 1, 9, 6, 3, 5],
            [3, 4, 5, 2, 8, 6, 1, 7, 9]]
+
+parentheses_three_1 = '{[()]}'
+parentheses_three_2 = '{[(])}'
+parentheses_three_3 = '{{[[(())]]}}'
+parentheses_three_4 = '{{[[(())]]}})'
+
+sock_merchant_variables = [9, [10, 20, 20, 10, 10, 30, 50, 10, 20]]

@@ -276,3 +276,45 @@ assert validSolution(sudoku1) == False
 assert validSolution(sudoku2) == True
 assert validSolution(sudoku3) == False
 
+
+def valid_parentheses_three(string):
+    data = {
+        '(': ')',
+        '[': ']',
+        '{': '}'
+    }
+    temp = []
+    for i in string:
+        if i in data.keys():
+            temp.append(data[i])
+        else:
+            if len(temp) == 0:
+                return False
+            if i == temp[-1]:
+                temp.pop()
+            else:
+                return False
+    if len(temp) == 0:
+        return True
+    return False
+
+
+assert valid_parentheses_three(parentheses_three_1) == True
+assert valid_parentheses_three(parentheses_three_2) == False
+assert valid_parentheses_three(parentheses_three_3) == True
+assert valid_parentheses_three(parentheses_three_4) == False
+
+
+def sockMerchant(n, ar):
+    done = []
+    result = 0
+    for i in ar:
+        if i not in done:
+            temp = [x for x in ar if x == i]
+            done.append(i)
+            length = len(temp) // 2
+            result += length
+    return result
+
+
+assert sockMerchant(*sock_merchant_variables) == 3
