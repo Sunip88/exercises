@@ -318,3 +318,105 @@ def sockMerchant(n, ar):
 
 
 assert sockMerchant(*sock_merchant_variables) == 3
+
+
+def students_second_worst(list):
+    list.sort(key=lambda x: x[1])
+
+    first = list[0]
+    result = []
+    for i in list:
+        if i[1] != first[1]:
+            if result:
+                if result[0][1] == i[1]:
+                    result.append(i)
+            else:
+                result.append(i)
+    result.sort(key=lambda x: x[0])
+    result_str = "\n".join(x[0] for x in result)
+    return result_str
+
+
+assert students_second_worst(students_second_worst_variables) == students_second_worst_result
+
+from string import ascii_uppercase
+def validate_uid(input_text):
+    alphabet_upper = ascii_uppercase
+    numbers = list(range(0, 10))
+    test_upper = 0
+    test_numbers = 0
+    repeat_check = []
+    for i in input_text:
+        if i in alphabet_upper:
+            test_upper += 1
+        if i.isdigit():
+            number = int(i)
+            if number in numbers:
+                test_numbers += 1
+        if i not in repeat_check:
+            repeat_check.append(i)
+        else:
+            return False
+    if test_upper >= 2 and test_numbers >= 3:
+        return True
+    return False
+
+
+assert validate_uid("B1CD102354") == False
+assert validate_uid("B1CDEF2354") == True
+
+
+def valid_card_number(input_text):
+    only_digits = input_text.replace("-", "")
+    if len(only_digits) != 16:
+        return False
+    first_number = input_text[0]
+    correct_line = [4, 9, 14]
+    correct_first = ['4', '5', '6']
+    correct_signs = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '-']
+    count = 0
+
+    if first_number not in correct_first:
+        return False
+    for nr, i in enumerate(input_text):
+        if i not in correct_signs:
+            return False
+        if i == '-':
+            if nr not in correct_line:
+                return False
+    for nr, i in enumerate(only_digits):
+        if i == only_digits[nr - 1]:
+            count += 1
+            if count == 3:
+                return False
+        else:
+            count = 0
+    return True
+
+
+assert valid_card_number('5122-2368-7954-3214') == True
+assert valid_card_number('4253625879615786') == True
+assert valid_card_number('4424424424442444') == True
+assert valid_card_number('42536258796157867') == False
+assert valid_card_number('4424444424442444') == False
+assert valid_card_number('5122-2368-7954 - 3214') == False
+assert valid_card_number('44244x4424442444') == False
+assert valid_card_number('0525362587961578') == False
+
+
+def max_value_x(fnc_details, *args):
+    all_prod = list(set(product(*args)))
+    max_sum = 0
+    max_row = []
+    for row in all_prod:
+        temp_sum = 0
+        for i in row:
+            temp_sum += i*i
+        temp_sum = temp_sum % fnc_details[1]
+        if temp_sum > max_sum:
+            max_sum = temp_sum
+            max_row = row
+    return max_sum
+
+
+assert max_value_x([3, 1000], [2, 5, 4], [3, 7, 8, 9], [5, 5, 7, 8, 9, 10]) == 206

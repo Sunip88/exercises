@@ -124,3 +124,6 @@ parentheses_three_3 = '{{[[(())]]}}'
 parentheses_three_4 = '{{[[(())]]}})'
 
 sock_merchant_variables = [9, [10, 20, 20, 10, 10, 30, 50, 10, 20]]
+
+students_second_worst_variables = [['Harry', 37.21], ['Berry', 37.21], ['Tina', 37.2], ['Akriti', 41], ['Harsh', 39]]
+students_second_worst_result = """Berry\nHarry"""
