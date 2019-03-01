@@ -127,3 +127,15 @@ sock_merchant_variables = [9, [10, 20, 20, 10, 10, 30, 50, 10, 20]]
 
 students_second_worst_variables = [['Harry', 37.21], ['Berry', 37.21], ['Tina', 37.2], ['Akriti', 41], ['Harsh', 39]]
 students_second_worst_result = """Berry\nHarry"""
+
+repeatedString_variables = ["kmretasscityylpdhuwjirnqimlkcgxubxmsxpypgzxtenweirknjtasxtvxemtwxuarabssvqdnktqadhyktagjxoanknhgilnm", 736778906400]
+repeatedString_result = 51574523448
+
+hourglassSum_variable = [
+    [1, 1, 1, 0, 0, 0],
+    [0, 1, 0, 0, 0, 0],
+    [1, 1, 1, 0, 0, 0],
+    [0, 0, 2, 4, 4, 0],
+    [0, 0, 0, 2, 0, 0],
+    [0, 0, 1, 2, 4, 0]
+]
