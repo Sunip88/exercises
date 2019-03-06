@@ -781,3 +781,46 @@ assert freqQuery([(1, 1), (2, 2), (3, 2), (1, 1), (1, 1), (2, 1), (3, 2)]) == [0
 assert freqQuery([(1, 5), (1, 6), (3, 2), (1, 10), (1, 10), (1, 6), (2, 5), (3, 2)]) == [0, 1]
 assert freqQuery([(1, 3), (2, 3), (3, 2), (1, 4), (1, 5), (1, 5), (1, 4), (3, 2), (2, 4), (3, 2)]) == [0, 1, 1]
 assert freqQuery([(3, 4), (2, 1003), (1, 16), (3, 1)]) == [0, 1]
+
+
+def countSwaps(a):
+    array_sorted = False
+    count = 0
+    while not array_sorted:
+        array_sorted = True
+        for nr, i in enumerate(a):
+            if nr < len(a) - 1:
+                if a[nr] > a[nr + 1]:
+                    a[nr], a[nr + 1] = a[nr + 1], a[nr]
+                    array_sorted = False
+                    count += 1
+    return [count, a[0], a[len(a) - 1]]
+
+
+assert countSwaps([6, 4, 1]) == [3, 1, 6]
+
+
+def maximumToys(prices, k):
+    # prices = sorted(prices)
+    array_sorted = False
+    length = len(prices) - 1
+    result = []
+    while not array_sorted:
+        array_sorted = True
+        i = 0
+        while i < length:
+            if prices[i] > prices[i + 1]:
+                prices[i], prices[i + 1] = prices[i + 1], prices[i]
+                array_sorted = False
+            i += 1
+        length = length - 1
+    for i in prices:
+        if k - i >= 0:
+            result.append(i)
+            k = k - i
+        else:
+            break
+    return len(result)
+
+
+assert maximumToys([1, 12, 5, 111, 200, 1000, 10], 50) == 4
