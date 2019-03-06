@@ -139,3 +139,7 @@ hourglassSum_variable = [
     [0, 0, 0, 2, 0, 0],
     [0, 0, 1, 2, 4, 0]
 ]
+
+checkMagazine_variables = ['give me one grand today night', 'give one grand today']
+
+

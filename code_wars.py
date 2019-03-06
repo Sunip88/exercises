@@ -2,6 +2,8 @@ from code_wars_questions import *
 from datetime import date, timedelta
 from itertools import combinations, permutations, product, combinations_with_replacement
 import numpy
+from string import ascii_uppercase
+from collections import Counter
 
 
 def balance(book):
@@ -74,6 +76,11 @@ assert tribonacci(*tribonacci_variables_9) == tribonacci_result_9
 
 
 def catch_sign_change(lst):
+    '''
+    Catches sign changes in list
+    :param lst: list of integers
+    :return: integer
+    '''
     #for some reason "0" is positive number
     count = 0
     temp = []
@@ -99,6 +106,11 @@ assert catch_sign_change(catch_sign_change_variable_5) == catch_sign_change_resu
 
 
 def unlucky_days(year):
+    '''
+    Counts all friday 13 in given year
+    :param year: integer
+    :return: integer
+    '''
     count = 0
     days = (date(year, 12, 31) - date(year, 1, 1)).days + 1
     for i in range(days):
@@ -117,6 +129,11 @@ memo = {}
 
 
 def fibonacci(n):
+    '''
+    Gives fibonacci number
+    :param n: integer
+    :return: integer
+    '''
     if n in memo:
         return memo[n]
     if n in [0, 1]:
@@ -147,6 +164,11 @@ assert zeros(4617) == 1151
 
 
 def get_pins(observed):
+    '''
+    Gives all possible combinations of pin number with mistake possibilities (pin_numbers)
+    :param observed: string
+    :return: string
+    '''
     pin_numbers = {
         "1": ["1", "2", "4"],
         "2": ["1", "2", "3", "5"],
@@ -175,6 +197,11 @@ assert sorted(get_pins(get_pin_variable_3)) == sorted(get_pin_result_3)
 
 
 def valid_parentheses(string):
+    '''
+    Returns True or False if string with parentheses is valid (all parentheses are closed)
+    :param string: string
+    :return: boolean
+    '''
     temp = []
     for i in string:
         if i == "(":
@@ -214,6 +241,11 @@ def unpack(l):
 
 
 def duplicate_count(text):
+    '''
+    Counts letters with appears more than once in input
+    :param text: string
+    :return: integer
+    '''
     text_lower = text.lower()
     temp = []
     result = []
@@ -245,6 +277,11 @@ def points(games):
 
 
 def validSolution(board):
+    '''
+    Return True if sudoku is valid
+    :param board: list of lists of integers
+    :return: boolean
+    '''
     check = [1, 2, 3, 4, 5, 6, 7, 8, 9]
     # checking rows
     for row in board:
@@ -290,6 +327,12 @@ assert validSolution(sudoku3) == False
 
 
 def valid_parentheses_three(string):
+    '''
+    Returns True or False if string with parentheses is valid (all parentheses are closed). Its working with 3 types of
+    parentheses {[(
+    :param string: string
+    :return: boolean
+    '''
     data = {
         '(': ')',
         '[': ']',
@@ -318,6 +361,12 @@ assert valid_parentheses_three(parentheses_three_4) == False
 
 
 def sockMerchant(n, ar):
+    '''
+    Returns number of pairs of numbers
+    :param n: length of list (ar)
+    :param ar: list of integers
+    :return: integer
+    '''
     done = []
     result = 0
     for i in ar:
@@ -351,7 +400,7 @@ def students_second_worst(list):
 
 assert students_second_worst(students_second_worst_variables) == students_second_worst_result
 
-from string import ascii_uppercase
+
 def validate_uid(input_text):
     alphabet_upper = ascii_uppercase
     numbers = list(range(0, 10))
@@ -578,3 +627,157 @@ array_variable = [
 ]
 
 assert  arrayManipulation(5, array_variable) == 200
+
+
+def checkMagazine(magazine, note):
+    '''
+    Returns True if magazine have all words given in note
+    :param magazine: string
+    :param note: string
+    :return: boolean
+    '''
+    splited_magazine = magazine.split()
+    splited_note = note.split()
+    splited_magazine_dictionary = {}
+
+    for i in splited_magazine:
+        if i in splited_magazine_dictionary:
+            splited_magazine_dictionary[i] += 1
+        else:
+            splited_magazine_dictionary[i] = 1
+    for i in splited_note:
+        if i in splited_magazine_dictionary:
+            splited_magazine_dictionary[i] -= 1
+            if splited_magazine_dictionary[i] < 0:
+                return False
+        else:
+            return False
+    return True
+
+
+assert checkMagazine(*checkMagazine_variables) == True
+
+
+def twoStrings(s1, s2):
+    for i in s2:
+        if i in s1:
+            return True
+    return False
+
+
+assert twoStrings('hello', 'world') == True
+assert twoStrings('hi', 'world') == False
+
+
+# def sherlockAndAnagrams(s):
+#     list_of_words = []
+#     result = 0
+#     for i in range(1, len(s)):
+#         list_of_words.extend(set(combinations(s, i)))
+#     print(list_of_words)
+#     for i in list_of_words:
+#         temp = "".join(i)
+#         if temp == temp[::-1]:
+#             result += 1
+#     return result
+
+
+def plusMinus(arr):
+    '''
+    Returns percentage (in decimal) of positive, negative and zeros in list
+    :param arr: list of integers
+    :return: string
+    '''
+    length = len(arr)
+    count_more = 0
+    count_less = 0
+    count_zero = 0
+    for i in arr:
+        if i > 0:
+            count_more += 1
+        elif i < 0:
+            count_less += 1
+        else:
+            count_zero += 1
+    more = count_more/length
+    less = count_less/length
+    zero = count_zero/length
+    return "{:.6f}\n{:.6f}\n{:.6f}".format(more, less, zero)
+
+
+# print(plusMinus([-4, 3, -9, 0, 4, 1]))
+
+
+def staircase(n):
+    '''
+         #
+        ##
+       ###
+      ####
+     #####
+    ######
+    :param n: integer
+    :return: string
+    '''
+    temp = []
+    for i in range(1, n + 1):
+        row_stairs = int(n-i) * " " + i * "#"
+        temp.append(row_stairs)
+    return "\n".join(temp)
+
+
+# print(staircase(6))
+
+
+def countTriplets2(arr, r):
+    #not mine
+    r2 = Counter()
+    r3 = Counter()
+
+    count = 0
+
+    for v in arr:
+        if v in r3:
+            count += r3[v]
+
+        if v in r2:
+            r3[v * r] += r2[v]
+        r2[v * r] += 1
+    return count
+
+
+assert countTriplets2([1, 2, 4, 8], 2) == 2
+
+
+def freqQuery(queries):
+    '''
+    You are given q queries. Each query is of the form two integers described below:
+    - (1, x) : Insert x in your data structure.
+    - (2, y) : Delete one occurence of y from your data structure, if present.
+    - (3, z) : Check if any integer is present whose frequency is exactly . If yes, print 1 else 0.
+    :param queries: list of sets
+    :return: list of integers
+    '''
+    data_list = []
+    r2 = Counter()
+    result = []
+    for i in queries:
+        if i[0] == 1:
+            data_list.append(i[1])
+            r2[i[1]] += 1
+        elif i[0] == 2:
+            if i[1] in data_list:
+                data_list.remove(i[1])
+                r2[i[1]] -= 1
+        elif i[0] == 3:
+            if i[1] in r2.values():
+                result.append(1)
+            else:
+                result.append(0)
+    return result
+
+
+assert freqQuery([(1, 1), (2, 2), (3, 2), (1, 1), (1, 1), (2, 1), (3, 2)]) == [0, 1]
+assert freqQuery([(1, 5), (1, 6), (3, 2), (1, 10), (1, 10), (1, 6), (2, 5), (3, 2)]) == [0, 1]
+assert freqQuery([(1, 3), (2, 3), (3, 2), (1, 4), (1, 5), (1, 5), (1, 4), (3, 2), (2, 4), (3, 2)]) == [0, 1, 1]
+assert freqQuery([(3, 4), (2, 1003), (1, 16), (3, 1)]) == [0, 1]
