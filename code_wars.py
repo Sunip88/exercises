@@ -4,6 +4,7 @@ from itertools import combinations, permutations, product, combinations_with_rep
 import numpy
 from string import ascii_uppercase
 from collections import Counter
+from string import ascii_lowercase
 
 
 def balance(book):
@@ -824,3 +825,136 @@ def maximumToys(prices, k):
 
 
 assert maximumToys([1, 12, 5, 111, 200, 1000, 10], 50) == 4
+
+
+def makeAnagram(a, b):
+    a_counter = Counter(a)
+    b_counter = Counter(b)
+    minus_1 = a_counter - b_counter
+    minus_2 = b_counter - a_counter
+    return sum(minus_1.values()) + sum(minus_2.values())
+
+
+def number_needed(a, b):
+    count = 0
+    for letter in ascii_lowercase:
+        ia = a.count(letter)
+        ib = b.count(letter)
+        count += abs(ia - ib)
+    return count
+
+
+assert makeAnagram('jxwtrhvujlmrpdoqbisbwhmgpmeoke', 'fcrxzwscanmligyxyvym') == 30
+
+
+def alternatingCharacters(s):
+    count = 0
+    for nr, i in enumerate(s):
+        if nr > 0:
+            if s[nr] == s[nr - 1]:
+                count += 1
+    return count
+
+
+assert alternatingCharacters('BBBBB') == 4
+
+
+def isValid(s):
+    '''
+    Returns bool if string is valid. If frequencies are the same for all letters. Its possible to throw out one letter
+    from string
+    :param s: string
+    :return: bool
+    '''
+    letters = Counter(s)
+    values = Counter(letters.values())
+    bugs = 0
+    freq = values.most_common(1)[0][0]
+    for i in letters:
+        if letters[i] != freq:
+            bugs += min(abs(letters[i] - freq), letters[i])
+            if bugs > 1:
+                return False
+    return True
+
+
+assert isValid("aaaaabbbbbcccccdd") == False
+assert isValid("aaaaabbbbbcccccd") == True
+assert isValid("aabbccddeefghi") == False
+
+
+def miniMaxSum(arr):
+    sorted_arr = sorted(arr)
+    min = sum(sorted_arr[0:4])
+    max = sum(sorted_arr[len(arr) - 4:len(arr)])
+    return f"{min}, {max}"
+
+assert miniMaxSum([1, 2, 3, 4, 5]) == "10, 14"
+
+
+class LinkedList:
+
+    def __init__(self):
+        self._first = None
+        self._last = None
+
+    def add(self, value):
+        new = Node(value)
+        if self._first is None:
+            self._first = new
+        else:
+            self._last.next = new
+        self._last = new
+
+    def first(self):
+        return self._first.value
+
+    def last(self):
+        return self._last.value
+
+    def get(self, index=0):
+        current_index = 0
+        current_node = self._first
+        while current_index != index:
+            if current_node.next is None:
+                raise IndexError()
+            current_node = current_node.next
+            current_index += 1
+        return current_node.value
+
+    def remove(self, last=True):
+        if self._first == self._last:
+            self._last = self._first = None
+        if not last:
+            self._first = self._first.next
+        else:
+            current_node = self._first
+            while current_node.next != self._last:
+                current_node = current_node.next
+            current_node.next = None
+            self._last = current_node
+
+    def __iter__(self):
+        current_node = self._first
+        while current_node:
+            yield current_node.value
+            current_node = current_node.next
+
+
+class Node:
+    def __init__(self, value):
+        self.value = value
+        self.next = None
+
+
+# l = LinkedList()
+# l.add(1)
+# l.add(2)
+# l.add(3)
+# print(l.first())  # 1
+# print(l.get())  # 1
+# print(l.get(1))  # 3
+# print(l.last())  # 3
+# l.remove()  # -> 1, 2
+# l.remove(False)  # -> 2
+# print(list(l))
