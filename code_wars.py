@@ -958,3 +958,18 @@ class Node:
 # l.remove()  # -> 1, 2
 # l.remove(False)  # -> 2
 # print(list(l))
+
+
+def substrCount(n, input_string):
+    result = []
+    for nr_i in range(n):
+        for nr_j in range(n - nr_i):
+            part_string = input_string[nr_i:nr_j+nr_i+1]
+            if part_string == part_string[::-1]:
+                length_string = len(Counter(part_string))
+                if length_string < 3:
+                    result.append(part_string)
+    return len(result)
+
+
+print(substrCount(7, 'abcbaba'))
