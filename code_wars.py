@@ -972,4 +972,38 @@ def substrCount(n, input_string):
     return len(result)
 
 
-print(substrCount(7, 'abcbaba'))
+assert substrCount(7, 'abcbaba') == 10
+
+
+def dynamicArray(n, queries):
+    lists = []
+    result = []
+    last_answer = 0
+    for i in range(n):
+        lists.append([])
+    for action, sequence_number, value_element in queries:
+        index = (sequence_number ^ last_answer) % n
+        if action == 1:
+            lists[index].append(value_element)
+        elif action == 2:
+            sequence = lists[index]
+            value_place = value_element % len(sequence)
+            last_answer = sequence[value_place]
+            result.append(last_answer)
+    return result
+
+
+assert dynamicArray(2, [(1, 0, 5), (1, 1, 7), (1, 0, 3), (2, 1, 0), (2, 1, 1)]) == [7, 3]
+
+
+def left_rotation(n, d, input_list):
+    numbers_of = n // d
+    rest_of = n % d
+    if rest_of == 0:
+        return input_list
+    for i in range(rest_of):
+        temp = input_list.pop()
+        input_list.insert(0, temp)
+    return input_list
+
+assert left_rotation(5, 4, [1, 2, 3, 4, 5]) == [5, 1, 2, 3, 4]
