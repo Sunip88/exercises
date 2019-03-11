@@ -997,13 +997,49 @@ assert dynamicArray(2, [(1, 0, 5), (1, 1, 7), (1, 0, 3), (2, 1, 0), (2, 1, 1)]) 
 
 
 def left_rotation(n, d, input_list):
-    numbers_of = n // d
-    rest_of = n % d
-    if rest_of == 0:
-        return input_list
-    for i in range(rest_of):
+    for i in range(n - d):
         temp = input_list.pop()
         input_list.insert(0, temp)
     return input_list
 
+
 assert left_rotation(5, 4, [1, 2, 3, 4, 5]) == [5, 1, 2, 3, 4]
+
+
+def welcome_sign(n, m):
+    result = []
+    minuses = "---"
+    dots = ".|."
+    welcome = "WELCOME"
+    for i in range(1, n, 2):
+        number_minuses = int(((m - (i * 3)) / 2) / 3)
+        result.append(number_minuses*minuses + i*dots + number_minuses*minuses)
+    number_minuses_welcome = int(((m - 7) / 2))
+    result.append(number_minuses_welcome * "-" + welcome + number_minuses_welcome * "-")
+    for i in range(n-2, 0, -2):
+        number_minuses = int(((m - (i * 3)) / 2) / 3)
+        result.append(number_minuses*minuses + i*dots + number_minuses*minuses)
+    return "\n".join(result)
+
+
+# print(welcome_sign(11, 33))
+
+
+def count_substring(string, sub_string):
+    '''
+    it counts all apperances substring in string
+    :param string: string
+    :param sub_string: string
+    :return: integer
+    '''
+    count = 0
+    result = string.find(sub_string)
+    if result == -1:
+        return 0
+    while result != -1:
+        count += 1
+        result = string.find(sub_string, result + 1)
+    return count
+
+
+assert count_substring('ABCDCDC', 'CDC') == 2
