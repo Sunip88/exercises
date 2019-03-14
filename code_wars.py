@@ -224,6 +224,11 @@ assert valid_parentheses("hi(hi)()") == True
 
 
 def unpack(l):
+    '''
+    its unpacking lists
+    :param l:
+    :return:
+    '''
     # not mine
     res = []
     for i in l:
@@ -266,6 +271,11 @@ assert duplicate_count("indivisibility") == 1
 
 
 def points(games):
+    '''
+    Simple function counting score in games
+    :param games:
+    :return:
+    '''
     count = 0
     for i in games:
         x = i[0]
@@ -383,6 +393,12 @@ assert sockMerchant(*sock_merchant_variables) == 3
 
 
 def students_second_worst(list):
+    '''
+    ['Harry', 37.21]
+    takes list of lists (student name, student average) and returns second worst average
+    :param list: list of lists
+    :return: string
+    '''
     list.sort(key=lambda x: x[1])
 
     first = list[0]
@@ -403,6 +419,11 @@ assert students_second_worst(students_second_worst_variables) == students_second
 
 
 def validate_uid(input_text):
+    '''
+    Validates uid - minimum 2 uppercase letters, minimum 3 number from range 0 to 9 and signs shouldnt repeat yourself
+    :param input_text: string
+    :return: boolean
+    '''
     alphabet_upper = ascii_uppercase
     numbers = list(range(0, 10))
     test_upper = 0
@@ -429,6 +450,11 @@ assert validate_uid("B1CDEF2354") == True
 
 
 def valid_card_number(input_text):
+    '''
+    Validates card number
+    :param input_text: string
+    :return: boolean
+    '''
     only_digits = input_text.replace("-", "")
     if len(only_digits) != 16:
         return False
@@ -1043,3 +1069,28 @@ def count_substring(string, sub_string):
 
 
 assert count_substring('ABCDCDC', 'CDC') == 2
+
+
+def minion_game(string):
+    stuart = []
+    kevin = []
+    vowels = ['A', 'E', 'I', 'O', 'U']
+    length = len(string)
+    for nr, letter in enumerate(string):
+        if letter in vowels:
+            for item in range(nr + 1, length + 1):
+                kevin.append(string[nr:item])
+        else:
+            for item in range(nr + 1, length + 1):
+                stuart.append(string[nr:item])
+    if len(kevin) > len(stuart):
+        result = f"Kevin {len(kevin)}"
+    elif len(stuart) > len(kevin):
+        result = f"Stuart {len(stuart)}"
+    else:
+        result = f"Draw"
+    return result
+
+
+assert minion_game("BANANA") == "Stuart 12"
+
