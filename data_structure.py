@@ -72,20 +72,34 @@ def dictionaries():
     print(dict_1.keys())
 
 
-def arrays_2d():
+def matrix():
     array_1 = np.array([[1, 2, 3, 4], [5, 6, 7, 5], [9, 10, 11, 12]])
-    # array_1.insert(2, [0, 5, 11, 13, 6])
     print(array_1)
     print(type(array_1))
-    print(array_1[0:3, 1:3])
-arrays_2d()
+    print(array_1[0:3, 0:3])
+    a = np.array([['Mon', 18, 20, 22, 17], ['Tue', 11, 18, 21, 18],
+               ['Wed', 15, 21, 20, 19], ['Thu', 11, 20, 22, 21],
+               ['Fri', 18, 17, 23, 22], ['Sat', 12, 22, 20, 18],
+               ['Sun', 13, 15, 19, 16]])
+    m = np.reshape(a, (7, 5))
+    print(m)
 
-def matrix():
-    pass
+
+def arrays_2d():
+    array_2 = [[1, 2, 3, 4], [5, 6, 7], [9, 10, 11, 12]]
+    print(array_2)
+    array_2.insert(1, ['a', 'b', 'c'])
+    print(array_2)
 
 
 def sets():
-    pass
+    list_1 = ["Mon", "Tue", "Wed", "Fri", "Thu", "Sat", "Sun", "Sun", "Fri", "Mon"]
+    week_days = set(list_1)
+    print(week_days)
+    week_days.add("buu")
+    print(week_days)
+    week_days.remove("buu")
+    print(week_days)
 
 
 def maps():
