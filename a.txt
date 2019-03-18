@@ -1,0 +1,34 @@
+
+scrum!!
+mvp
+python2 vs python3
+dekoratory
+context menager
+
+options - http get post itd
+CRUDE
+
+powiązanie z bazami danych rest api
+autentykacja - basic session jwt token
+
+git flow!!
+
+!!!!SOAP REST!!!!
+
+contious integration
+
+SOLID
+
+wzorce projektowe (używane w django)
+
+monkey test
+
+SSH połączenie miedzy komputerami - konsola
+
+mongoDB
+
+jedna baza czy wiele
+
+!!!!!django Values, Select related, prefetch related, values_list, only!!!!!
+
+django_toolbar

@@ -1,4 +1,5 @@
 from array import *
+import numpy as np
 '''
 tutorials point -  data structure
 '''
@@ -72,8 +73,12 @@ def dictionaries():
 
 
 def arrays_2d():
-    pass
-
+    array_1 = np.array([[1, 2, 3, 4], [5, 6, 7, 5], [9, 10, 11, 12]])
+    # array_1.insert(2, [0, 5, 11, 13, 6])
+    print(array_1)
+    print(type(array_1))
+    print(array_1[0:3, 1:3])
+arrays_2d()
 
 def matrix():
     pass
