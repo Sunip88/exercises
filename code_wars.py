@@ -349,20 +349,16 @@ def valid_parentheses_three(string):
         '[': ']',
         '{': '}'
     }
-    temp = []
-    for i in string:
-        if i in data.keys():
-            temp.append(data[i])
+    stack = []
+    for item in string:
+        if item in data.keys():
+            stack.append(data[item])
         else:
-            if len(temp) == 0:
+            if not stack:
                 return False
-            if i == temp[-1]:
-                temp.pop()
-            else:
+            if item != stack.pop():
                 return False
-    if len(temp) == 0:
-        return True
-    return False
+    return not stack
 
 
 assert valid_parentheses_three(parentheses_three_1) == True
@@ -916,74 +912,6 @@ def miniMaxSum(arr):
     return f"{min}, {max}"
 
 assert miniMaxSum([1, 2, 3, 4, 5]) == "10, 14"
-
-
-class LinkedList:
-
-    def __init__(self):
-        self._first = None
-        self._last = None
-
-    def add(self, value):
-        new = Node(value)
-        if self._first is None:
-            self._first = new
-        else:
-            self._last.next = new
-        self._last = new
-
-    def first(self):
-        return self._first.value
-
-    def last(self):
-        return self._last.value
-
-    def get(self, index=0):
-        current_index = 0
-        current_node = self._first
-        while current_index != index:
-            if current_node.next is None:
-                raise IndexError()
-            current_node = current_node.next
-            current_index += 1
-        return current_node.value
-
-    def remove(self, last=True):
-        if self._first == self._last:
-            self._last = self._first = None
-        if not last:
-            self._first = self._first.next
-        else:
-            current_node = self._first
-            while current_node.next != self._last:
-                current_node = current_node.next
-            current_node.next = None
-            self._last = current_node
-
-    def __iter__(self):
-        current_node = self._first
-        while current_node:
-            yield current_node.value
-            current_node = current_node.next
-
-
-class Node:
-    def __init__(self, value):
-        self.value = value
-        self.next = None
-
-
-# l = LinkedList()
-# l.add(1)
-# l.add(2)
-# l.add(3)
-# print(l.first())  # 1
-# print(l.get())  # 1
-# print(l.get(1))  # 3
-# print(l.last())  # 3
-# l.remove()  # -> 1, 2
-# l.remove(False)  # -> 2
-# print(list(l))
 
 
 def substrCount(n, input_string):
