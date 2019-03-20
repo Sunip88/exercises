@@ -911,6 +911,7 @@ def miniMaxSum(arr):
     max = sum(sorted_arr[len(arr) - 4:len(arr)])
     return f"{min}, {max}"
 
+
 assert miniMaxSum([1, 2, 3, 4, 5]) == "10, 14"
 
 
@@ -1021,4 +1022,3 @@ def minion_game(string):
 
 
 assert minion_game("BANANA") == "Stuart 12"
-

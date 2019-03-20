@@ -136,9 +136,9 @@ def linked_lists():
             self._first = None
             self._last = None
 
-        def add(self, value, last=True):
+        def add(self, value, end=True):
             new = Node(value)
-            if last:
+            if end:
                 if self._first is None:
                     self._first = new
                 else:
@@ -242,14 +242,149 @@ def stacks():
     print(stack_try.remove())
     print(stack_try.stack)
 
-stacks()
-
 
 def queue():
-    pass
+    class Queue:
+
+        def __init__(self):
+            self.__queue = []
+
+        def add(self, data_value):
+            if data_value not in self.queue:
+                self.queue.insert(0, data_value)
+                return True
+            return False
+
+        def remove(self):
+            if len(self.queue) <= 0:
+                return ("No element in stack")
+            else:
+                return self.queue.pop()
+
+        @property
+        def queue(self):
+            return self.__queue
+
+    queue_try = Queue()
+    queue_try.add(1)
+    queue_try.add(2)
+    queue_try.add(3)
+    print(queue_try.queue)
+    print(queue_try.remove())
+    print(queue_try.queue)
 
 
 def dequeue():
+    dequeue_1 = collections.deque([1, 2, 3, 4])
+    print(dequeue_1)
+    dequeue_1.append(5)
+    print(dequeue_1)
+    dequeue_1.appendleft(0)
+    print(dequeue_1)
+    dequeue_1.pop()
+    print(dequeue_1)
+    dequeue_1.popleft()
+    print(dequeue_1)
+    dequeue_1.reverse()
+    print(dequeue_1)
+
+
+def advanced_linked_list():
+
+    class Node:
+        def __init__(self, data):
+            self.data = data
+            self.next = None
+            self.prev = None
+
+
+    class DoublyLinkedList:
+
+        def __init__(self):
+            self._first = None
+            self._last = None
+
+        def first(self):
+            return self._first.value
+
+        def last(self):
+            return self._last.value
+
+        def append(self, new_value):
+            new_node = Node(new_value)
+            new_node.prev = self._last
+            if self._first is None:
+                self._first = new_node
+            else:
+                self._last.next = new_node
+            self._last = new_node
+
+        def prepend(self, new_value):
+            new_node = Node(new_value)
+            temp = None
+            if self._last is None:
+                self._last = new_node
+            else:
+                self._first.prev = new_node
+                temp = self._first
+            self._first = new_node
+            self._first.next = temp
+
+        def remove(self, last=True):
+            if self._first == self._last:
+                self._last = self._first = None
+            if not last:
+                self._first = self._first.next
+                self._first.prev = None
+            else:
+                self._last = self._last.prev
+                self._last.next = None
+
+        def __iter__(self):
+            current_node = self._first
+            while current_node:
+                # print(current_node.data, 'current')
+                # try:
+                #     print(current_node.prev.data, 'prev')
+                # except:
+                #     pass
+                # try:
+                #     print(current_node.next.data, 'next')
+                # except:
+                #     pass
+                yield current_node.data
+                current_node = current_node.next
+
+    linked_1 = DoublyLinkedList()
+    linked_1.append(1)
+    linked_1.append(2)
+    linked_1.prepend(3)
+    print(list(linked_1))
+    linked_1.remove(False)
+    print(list(linked_1))
+    linked_1.append(4)
+    linked_1.append(5)
+    linked_1.remove()
+    print(list(linked_1))
+
+
+def hash_table():
+    pass
+
+
+def binary_tree():
+    pass
+
+
+def search_tree():
+    pass
+
+
+def heaps():
+    pass
+
+
+def graphs():
     pass
 
 # ...
